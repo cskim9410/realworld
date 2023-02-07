@@ -1,4 +1,8 @@
 const PostCard = () => {
-  return <div>PostCard</div>;
+  return (
+    <div className="border-t-[1px] border-[rgba(0, 0, 0, 0.1)] py-6">
+      PostCard
+    </div>
+  );
 };
 export default PostCard;
