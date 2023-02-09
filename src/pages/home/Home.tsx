@@ -1,20 +1,15 @@
 import Banner from "../../components/Banner";
 import { NavLink } from "react-router-dom";
-import PostCard from "../../components/PostCard";
+import ArticleCard from "../../components/ArticleCard";
 import { useEffect } from "react";
-import axios from "axios";
+import useArticles from "../../hooks/useArticles";
 
 const Home = () => {
-  const getArticles = async () => {
-    const res = await axios.get("https://api.realworld.io/api/articles");
-    const articles = await res.data;
-    console.log(articles);
-    return articles;
-  };
-
+  const { articles, error, isLoading } = useArticles();
   useEffect(() => {
-    getArticles();
-  }, []);
+    console.log(articles);
+    console.log(error);
+  }, [articles, error]);
 
   return (
     <>
@@ -38,7 +33,8 @@ const Home = () => {
           </li>
         </ul>
         {/* </div> */}
-        <PostCard />
+        {articles &&
+          articles.articles.map((article) => <ArticleCard article={article} />)}
       </div>
     </>
   );
