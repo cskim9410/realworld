@@ -6,10 +6,6 @@ import useArticles from "../../hooks/useArticles";
 
 const Home = () => {
   const { articles, error, isLoading } = useArticles();
-  useEffect(() => {
-    console.log(articles);
-    console.log(error);
-  }, [articles, error]);
 
   return (
     <>
