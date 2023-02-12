@@ -41,7 +41,10 @@ const ArticleCard = ({ article }: { article: Article }) => {
           </span>
           <ul className="max-w-[50%] align-top">
             {article.tagList.map((tag) => (
-              <li className="font-light text-xs border border-[#ddd] text-[#aaa] inline-block px-2 rounded-[10rem] mr-1">
+              <li
+                key={tag}
+                className="font-light text-xs border border-[#ddd] text-[#aaa] inline-block px-2 rounded-[10rem] mr-1"
+              >
                 {tag}
               </li>
             ))}

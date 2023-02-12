@@ -1,25 +1,12 @@
-import axios, { AxiosError } from "axios";
 import useSWR from "swr";
 import type { MultipleArticle } from "../types/article";
 
-const fetcher = async () => {
-  try {
-    const res = await axios.get("/articles");
-    const articles = await res.data;
-    return articles;
-  } catch (error) {
-    if (error instanceof AxiosError) {
-      throw new Error(error.message);
-    }
-  }
-};
-
-const useArticles = () => {
+const useArticles = ({ tag }: { tag?: string }) => {
   const {
     data: articles,
     error,
     isLoading,
-  } = useSWR<MultipleArticle>("/api/articles", fetcher);
+  } = useSWR<MultipleArticle>(`/api/articles?${tag ? `tag=${tag}` : ""}`);
   return { articles, error, isLoading };
 };
 

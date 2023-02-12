@@ -21,5 +21,14 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    ({ addUtilities }) => {
+      addUtilities({
+        ".screen-width": {
+          "@apply mx-auto lg:max-w-[1140px] md:max-w-[720px] sm:max-w-[576px]":
+            "",
+        },
+      });
+    },
+  ],
 };

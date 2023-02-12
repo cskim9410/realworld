@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+/* @layer components {
+  .screen-width {
+    @apply mx-auto lg:max-w-[1140px] md:max-w-[720px] sm:max-w-[576px];
+  }
+} */
+
 body {
   margin: 0;
   font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI",

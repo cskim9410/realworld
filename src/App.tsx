@@ -1,16 +1,32 @@
 import Layout from "./components/layout";
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/home/Home";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
+import { SWRConfig } from "swr";
 
 function App() {
-  axios.defaults.baseURL = "https://api.realworld.io/api";
+  axios.defaults.baseURL = "https://api.realworld.io";
+
+  const fetcher = async (url: string) => {
+    try {
+      const res = await axios.get(url);
+      const data = await res.data;
+      return data;
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        throw new Error(error.message);
+      }
+    }
+  };
+
   return (
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route path="/" element={<Home />}></Route>
-      </Route>
-    </Routes>
+    <SWRConfig value={{ fetcher }}>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route path="/" element={<Home />}></Route>
+        </Route>
+      </Routes>
+    </SWRConfig>
   );
 }
 
