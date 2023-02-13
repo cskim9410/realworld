@@ -1,17 +1,15 @@
 import Layout from "./components/layout";
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/home/Home";
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import { SWRConfig } from "swr";
 import Login from "./pages/login/Login";
+import { customGet } from "./api/config";
 
 function App() {
-  axios.defaults.baseURL = "https://api.realworld.io";
-
   const fetcher = async (url: string) => {
     try {
-      const res = await axios.get(url);
-      const data = await res.data;
+      const data = await customGet(url);
       return data;
     } catch (error) {
       if (error instanceof AxiosError) {

@@ -30,11 +30,11 @@ module.exports = {
             "",
         },
         ".input": {
-          "@apply px-6 py-4 rounded text-lg border mb-4 focus:outline-1 focus:outline-blue-400 w-full":
+          "@apply px-6 py-4 rounded text-lg border mb-4 focus:outline-1 focus:outline-blue-400 w-full disabled:bg-[#eceeef]":
             "",
         },
         ".confirm-btn": {
-          "@apply px-6 py-4 rounded text-lg text-white bg-green leading-[1.25] hover:bg-darkGreen":
+          "@apply px-6 py-4 rounded text-lg text-white bg-green leading-[1.25] hover:bg-darkGreen disabled:bg-darkGreen":
             "",
         },
       });
