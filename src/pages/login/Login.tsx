@@ -2,11 +2,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { FormEvent, useState, useRef } from "react";
 import type { CurrentUser } from "../../types/user";
 import { customPost } from "../../api/config";
+import useLoginStore from "../../store/loginStore";
 
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
+  const { loginAction } = useLoginStore();
   const navigate = useNavigate();
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -20,6 +22,7 @@ const Login = () => {
         },
       });
       localStorage.setItem("jwtToken", user.user.token);
+      loginAction();
       navigate("/");
     } catch (error) {
       console.log(error);

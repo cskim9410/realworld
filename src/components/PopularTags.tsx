@@ -1,6 +1,5 @@
-import { NavLink } from "react-router-dom";
 import useTags from "../hooks/useTags";
-import type { Dispatch, MouseEvent } from "react";
+import type { Dispatch } from "react";
 
 const PopularTags = ({
   setTag,

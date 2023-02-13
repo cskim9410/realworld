@@ -1,15 +1,16 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import LoginHeader from "../LoginHeader";
-import useUser from "./../../hooks/useUser";
 import LogoutHeader from "./../LogoutHeader";
+import useLoginStore from "../../store/loginStore";
 import { useEffect } from "react";
 
 const Header = () => {
-  const { user } = useUser();
+  const { isLogin, loginAction } = useLoginStore();
+  const token = localStorage.getItem("jwtToken");
 
   useEffect(() => {
-    console.log(user);
-  }, [user]);
+    if (token) loginAction();
+  }, [token, loginAction]);
 
   return (
     <nav className="screen-width">
@@ -17,7 +18,7 @@ const Header = () => {
         <Link to="/" className="text-green font-logo text-[1.5rem] pb-1">
           conduit
         </Link>
-        {user ? <LoginHeader /> : <LogoutHeader />}
+        {isLogin ? <LoginHeader /> : <LogoutHeader />}
       </div>
     </nav>
   );

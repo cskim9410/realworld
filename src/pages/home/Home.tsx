@@ -1,13 +1,13 @@
 import Banner from "../../components/Banner";
 import { NavLink } from "react-router-dom";
 import ArticleCard from "../../components/ArticleCard";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import useArticles from "../../hooks/useArticles";
 import PopularTags from "../../components/PopularTags";
 
 const Home = () => {
   const [tag, setTag] = useState("");
-  const { articles, error, isLoading } = useArticles({ tag });
+  const { articles } = useArticles({ tag });
 
   return (
     <>
