@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 const Footer = () => {
   return (
-    <div className="bg-gray-100 relative bottom-0 py-4 w-full mt-[3rem]">
+    <footer className="bg-gray-100 absolute bottom-0 py-4 w-full mt-[3rem]">
       <div className="px-[15px] md:max-w-[720px] sm:max-w-[576px] lg:max-w-[940px] mx-auto">
         <Link to="/" className="text-green font-logo">
           conduit
@@ -14,7 +14,7 @@ const Footer = () => {
           . Code &amp; design licensed under MIT.
         </span>
       </div>
-    </div>
+    </footer>
   );
 };
 export default Footer;

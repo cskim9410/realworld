@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./pages/home/Home";
 import axios, { AxiosError } from "axios";
 import { SWRConfig } from "swr";
+import Login from "./pages/login/Login";
 
 function App() {
   axios.defaults.baseURL = "https://api.realworld.io";
@@ -24,6 +25,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<Home />}></Route>
+          <Route path="/login" element={<Login />}></Route>
         </Route>
       </Routes>
     </SWRConfig>
