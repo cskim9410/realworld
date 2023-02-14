@@ -37,6 +37,9 @@ module.exports = {
           "@apply px-6 py-4 rounded text-lg text-white bg-green leading-[1.25] hover:bg-darkGreen disabled:bg-darkGreen":
             "",
         },
+        ".feed-nav-active": {
+          "@apply text-green border-b-2 border-green": "",
+        },
       });
     },
   ],

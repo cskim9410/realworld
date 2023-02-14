@@ -23,7 +23,13 @@ const ArticleCard = ({ article }: { article: Article }) => {
             </span>
           </div>
         </div>
-        <button className="border border-green font-medium rounded text-green py-1 px-2 text-sm hover:bg-green hover:text-white relative right-0">
+        <button
+          className={`border relative right-0 font-medium py-1 px-2 rounded text-sm border-green ${
+            article.favorited
+              ? "bg-green text-white hover:bg-darkGreen"
+              : "hover:text-white text-green hover:bg-green"
+          }`}
+        >
           <AiFillHeart className="inline-block align-baseline" />{" "}
           <span>{article.favoritesCount}</span>
         </button>

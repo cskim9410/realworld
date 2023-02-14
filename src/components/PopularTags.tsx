@@ -1,14 +1,16 @@
 import useTags from "../hooks/useTags";
-import type { Dispatch } from "react";
+import type { Dispatch, SetStateAction } from "react";
 
-const PopularTags = ({
-  setTag,
-}: {
-  setTag: Dispatch<React.SetStateAction<string>>;
-}) => {
+interface PopularTagsProps {
+  setTag: Dispatch<SetStateAction<string>>;
+  setActive: Dispatch<SetStateAction<"0" | "1" | "2">>;
+}
+
+const PopularTags = ({ setTag, setActive }: PopularTagsProps) => {
   const { tags } = useTags();
 
   const clickBtn = (tag: string) => {
+    setActive("2");
     setTag(tag);
   };
 
