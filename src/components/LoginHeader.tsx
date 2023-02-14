@@ -1,7 +1,6 @@
 import { NavLink } from "react-router-dom";
 import useUser from "../hooks/useUser";
 import { IoIosSettings } from "react-icons/io";
-import { FaEdit } from "react-icons/fa";
 import { RiEditBoxLine } from "react-icons/ri";
 
 const LoginHeader = () => {
