@@ -1,7 +1,7 @@
 import { useState, FormEvent, ChangeEvent, KeyboardEvent } from "react";
 import { postArticle } from "../../api/article";
-import { MdOutlineClose } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import EditTag from "../../components/EditTag";
 
 interface Body {
   title: string;
@@ -102,20 +102,7 @@ const Editor = () => {
           className="px-3 py-2 input"
           placeholder="Enter tags"
         />
-        <div>
-          {tagList.map((t) => (
-            <div
-              className="text-white text-[0.8rem] py-[0.1rem] mr-1 mb-1 bg-[#818a91] rounded-[10rem] px-[0.6rem] inline-block"
-              key={t}
-            >
-              <MdOutlineClose
-                className="inline-block mr-1 text-lg cursor-pointer"
-                onClick={() => removeTag(t)}
-              />
-              {` ${t} `}
-            </div>
-          ))}
-        </div>
+        <EditTag tagList={tagList} removeTag={removeTag} />
         <button className="confirm-btn px-6 py-3 text-xl ml-auto block">
           Publish Article
         </button>

@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { devtools, persist } from "zustand/middleware";
 
 interface State {
   isLogin: boolean;
@@ -6,10 +7,19 @@ interface State {
   logoutAction: () => void;
 }
 
-const useLoginStore = create<State>()((set) => ({
-  isLogin: false,
-  loginAction: () => set({ isLogin: true }),
-  logoutAction: () => set({ isLogin: false }),
-}));
+const useLoginStore = create<State>()(
+  devtools(
+    persist(
+      (set) => ({
+        isLogin: false,
+        loginAction: () => set({ isLogin: true }),
+        logoutAction: () => set({ isLogin: false }),
+      }),
+      {
+        name: "login-storage",
+      }
+    )
+  )
+);
 
 export default useLoginStore;

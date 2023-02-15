@@ -2,15 +2,9 @@ import { Link } from "react-router-dom";
 import LoginHeader from "../LoginHeader";
 import LogoutHeader from "./../LogoutHeader";
 import useLoginStore from "../../store/loginStore";
-import { useEffect } from "react";
 
 const Header = () => {
   const { isLogin, loginAction } = useLoginStore();
-  const token = localStorage.getItem("jwtToken");
-
-  useEffect(() => {
-    if (token) loginAction();
-  }, [token, loginAction]);
 
   return (
     <nav className="screen-width">

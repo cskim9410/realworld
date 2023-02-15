@@ -1,29 +1,32 @@
 import { Link, useNavigate } from "react-router-dom";
 import { FormEvent, useState, useRef } from "react";
-import type { CurrentUser } from "../../types/user";
-import { customPost } from "../../api/config";
+import { CurrentUser } from "../../types/user";
 import useLoginStore from "../../store/loginStore";
+import { customPost } from "../../api/config";
 
-const Login = () => {
+const Register = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
+  const { loginAction } = useLoginStore();
+
+  const usernameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
-  const { loginAction } = useLoginStore();
-  const navigate = useNavigate();
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsLoading(true);
     try {
-      const user: { user: CurrentUser } = await customPost("/api/users/login", {
+      const user: { user: CurrentUser } = await customPost("/api/users", {
         user: {
+          username: usernameRef.current?.value,
           email: emailRef.current?.value,
           password: passwordRef.current?.value,
         },
       });
       localStorage.setItem("jwtToken", user.user.token);
       loginAction();
-      navigate("/", { replace: true });
+      navigate("/");
     } catch (error) {
       console.log(error);
       setIsLoading(false);
@@ -33,31 +36,37 @@ const Login = () => {
   return (
     <div className="mx-auto max-w-[60%] text-center">
       <div className="mt-6 px-4">
-        <h1 className="text-4xl font-medium mb-2">Log in</h1>
+        <h1 className="text-4xl font-medium mb-2">Sign Up</h1>
         <p className="mb-2">
           <Link
             to="/register"
             className="text-green mb-4 hover:text-darkGreen hover:underline"
           >
-            Need an account?
+            Have an account?
           </Link>
         </p>
         <form onSubmit={handleSubmit}>
           <fieldset disabled={isLoading}>
             <input
-              ref={emailRef}
+              type="text"
+              ref={usernameRef}
+              placeholder="Username"
+              className="input px-6 py-4 text-lg"
+            />
+            <input
               type="email"
+              ref={emailRef}
               placeholder="Email"
               className="input px-6 py-4 text-lg"
             />
             <input
-              ref={passwordRef}
               type="password"
+              ref={passwordRef}
               placeholder="Password"
               className="input px-6 py-4 text-lg"
             />
             <button className="confirm-btn block ml-auto text-xl py-3 px-6">
-              Log in
+              Sign Up
             </button>
           </fieldset>
         </form>
@@ -65,4 +74,5 @@ const Login = () => {
     </div>
   );
 };
-export default Login;
+
+export default Register;

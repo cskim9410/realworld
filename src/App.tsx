@@ -6,6 +6,7 @@ import { SWRConfig } from "swr";
 import Login from "./pages/login/Login";
 import { customGet } from "./api/config";
 import Editor from "./pages/editor/Editor";
+import Register from "./pages/register/Register";
 
 function App() {
   const fetcher = async (url: string) => {
@@ -25,6 +26,7 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<Home />}></Route>
           <Route path="/login" element={<Login />}></Route>
+          <Route path="/register" element={<Register />}></Route>
           <Route path="/editor" element={<Editor />}></Route>
         </Route>
       </Routes>
