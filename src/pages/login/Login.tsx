@@ -42,7 +42,7 @@ const Login = () => {
             Need an account?
           </Link>
         </p>
-        <form onSubmit={(event) => handleSubmit(event)}>
+        <form onSubmit={handleSubmit}>
           <fieldset disabled={isLoading}>
             <input
               ref={emailRef}

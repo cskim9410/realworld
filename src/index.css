@@ -8,6 +8,10 @@ html {
   padding-bottom: 100px;
 }
 
+svg {
+  vertical-align: text-bottom;
+}
+
 body {
   margin: 0;
   font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI",
