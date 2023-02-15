@@ -14,7 +14,7 @@ const ArticleList = ({
   currentPage,
   hidden,
 }: ArticleListProps) => {
-  const { articles } = useArticles({
+  const { articles, mutate } = useArticles({
     query: query[Number(active)],
     page: currentPage,
   });
@@ -28,7 +28,7 @@ const ArticleList = ({
       {articles && (
         <>
           {articles.articles.map((article) => (
-            <ArticleCard key={article.slug} article={article} />
+            <ArticleCard key={article.slug} article={article} mutate={mutate} />
           ))}
         </>
       )}

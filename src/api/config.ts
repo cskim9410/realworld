@@ -28,9 +28,9 @@ const customAxios = async ({ method, url, body }: IcustomAxios) => {
 };
 
 export const customGet = (url: string) => customAxios({ method: "get", url });
-export const customPost = (url: string, body: {}) =>
+export const customPost = (url: string, body?: {}) =>
   customAxios({ method: "post", url, body });
-export const customPut = (url: string, body: {}) =>
+export const customPut = (url: string, body?: {}) =>
   customAxios({ method: "put", url, body });
 export const customDelete = (url: string) =>
   customAxios({ method: "delete", url });

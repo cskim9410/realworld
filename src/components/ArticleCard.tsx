@@ -1,8 +1,35 @@
-import { Article } from "../types/article";
+import type { Article, MultipleArticle } from "../types/article";
 import { AiFillHeart } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import useLoginStore from "../store/loginStore";
+import type { KeyedMutator } from "swr";
+import { addFavorite, deleteFavorite } from "../api/favorite";
+import { useState } from "react";
 
-const ArticleCard = ({ article }: { article: Article }) => {
+const ArticleCard = ({
+  article,
+  mutate,
+}: {
+  article: Article;
+  mutate: KeyedMutator<MultipleArticle>;
+}) => {
+  const { isLogin } = useLoginStore();
+  const navigate = useNavigate();
+  const [disabled, setDisabled] = useState(false);
+  const clickFavBtn = async () => {
+    if (!isLogin) navigate("/login");
+    setDisabled(true);
+    if (article.favorited) {
+      await deleteFavorite(article.slug);
+      await mutate();
+    }
+    if (!article.favorited) {
+      await addFavorite(article.slug);
+      await mutate();
+    }
+    setDisabled(false);
+  };
+
   return (
     <div className="border-t-[1px] border-[rgba(0, 0, 0, 0.1)] py-6 w-full">
       <div className="font-light mb-4 w-full flex items-start justify-between">
@@ -24,11 +51,13 @@ const ArticleCard = ({ article }: { article: Article }) => {
           </div>
         </div>
         <button
-          className={`border relative right-0 font-medium py-1 px-2 rounded text-sm border-green ${
+          className={`border relative right-0 font-medium py-1 px-2 rounded text-sm border-green disabled:cursor-not-allowed ${
             article.favorited
               ? "bg-green text-white hover:bg-darkGreen"
               : "hover:text-white text-green hover:bg-green"
-          }`}
+          } ${disabled ? "bg-green opacity-60 text-white" : ""}`}
+          disabled={disabled}
+          onClick={clickFavBtn}
         >
           <AiFillHeart className="inline-block align-baseline" />{" "}
           <span>{article.favoritesCount}</span>

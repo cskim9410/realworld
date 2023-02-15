@@ -7,8 +7,9 @@ const useArticles = ({ query, page = 1 }: { query?: string; page: number }) => {
     data: articles,
     error,
     isLoading,
+    mutate,
   } = useSWR<MultipleArticle>(`/api/articles${query}limit=10&offset=${offset}`);
-  return { articles, error, isLoading };
+  return { articles, error, isLoading, mutate };
 };
 
 export default useArticles;

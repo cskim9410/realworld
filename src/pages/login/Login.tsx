@@ -48,13 +48,13 @@ const Login = () => {
               ref={emailRef}
               type="email"
               placeholder="Email"
-              className="input"
+              className="input px-6 py-4 text-lg"
             />
             <input
               ref={passwordRef}
               type="password"
               placeholder="Password"
-              className="input"
+              className="input px-6 py-4 text-lg"
             />
             <button className="confirm-btn block ml-auto">Log in</button>
           </fieldset>
