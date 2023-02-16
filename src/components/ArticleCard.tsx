@@ -5,6 +5,7 @@ import useLoginStore from "../store/loginStore";
 import type { KeyedMutator } from "swr";
 import { addFavorite, deleteFavorite } from "../api/favorite";
 import { useState } from "react";
+import ArticleMeta from "./ArticleMeta";
 
 const ArticleCard = ({
   article,
@@ -34,21 +35,11 @@ const ArticleCard = ({
     <div className="border-t-[1px] border-[rgba(0, 0, 0, 0.1)] py-6 w-full">
       <div className="font-light mb-4 w-full flex items-start justify-between">
         <div>
-          <a href={""} className="inline-block">
-            <img
-              src={article.author.image}
-              alt="df"
-              className="h-8 w-8 rounded-full"
-            />
-          </a>
-          <div className="ml-1 inline-block leading-4 align-super">
-            <a href="" className="font-medium text-green ">
-              {article.author.username}
-            </a>
-            <span className="text-xs text-[#bbb] block">
-              {article.createdAt}
-            </span>
-          </div>
+          <ArticleMeta
+            user={article.author}
+            createdAt={article.createdAt}
+            nameColor="green"
+          />
         </div>
         <button
           className={`border relative right-0 font-medium py-1 px-2 rounded text-sm border-green disabled:cursor-not-allowed ${
@@ -63,7 +54,7 @@ const ArticleCard = ({
           <span>{article.favoritesCount}</span>
         </button>
       </div>
-      <Link to={`/#/article/${article.slug}`}>
+      <Link to={`/article/${article.slug}`}>
         <h2 className="text-2xl font-semibold mb-1 leading-[1.1]">
           {article.title}
         </h2>
