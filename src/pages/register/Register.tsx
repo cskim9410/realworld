@@ -1,8 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { FormEvent, useState, useRef } from "react";
-import { CurrentUser } from "../../types/user";
 import useLoginStore from "../../store/loginStore";
-import { customPost } from "../../api/config";
+import { registerUser } from "./../../api/user";
 
 const Register = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -17,7 +16,7 @@ const Register = () => {
     event.preventDefault();
     setIsLoading(true);
     try {
-      const user: { user: CurrentUser } = await customPost("/api/users", {
+      const user = await registerUser({
         user: {
           username: usernameRef.current?.value,
           email: emailRef.current?.value,
@@ -26,7 +25,7 @@ const Register = () => {
       });
       localStorage.setItem("jwtToken", user.user.token);
       loginAction();
-      navigate("/");
+      navigate("/", { replace: true });
     } catch (error) {
       console.log(error);
       setIsLoading(false);

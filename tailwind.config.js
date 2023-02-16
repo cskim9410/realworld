@@ -30,7 +30,7 @@ module.exports = {
             "",
         },
         ".input": {
-          "@apply rounded border mb-4 focus:outline-1 focus:outline-blue-400 w-full disabled:bg-[#eceeef]":
+          "@apply rounded border mb-4 focus:outline-none focus:border-[#66afe9] w-full disabled:bg-[#eceeef]":
             "",
         },
         ".confirm-btn": {

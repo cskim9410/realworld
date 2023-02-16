@@ -1,8 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { FormEvent, useState, useRef } from "react";
-import type { CurrentUser } from "../../types/user";
-import { customPost } from "../../api/config";
 import useLoginStore from "../../store/loginStore";
+import { loginUser } from "../../api/user";
 
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -15,7 +14,7 @@ const Login = () => {
     event.preventDefault();
     setIsLoading(true);
     try {
-      const user: { user: CurrentUser } = await customPost("/api/users/login", {
+      const user = await loginUser({
         user: {
           email: emailRef.current?.value,
           password: passwordRef.current?.value,

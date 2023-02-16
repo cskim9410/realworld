@@ -1,11 +1,9 @@
-import { CurrentUser } from "./../types/user";
+import type { resUser } from "./../types/user";
 import useSWR from "swr";
 import useLoginStore from "../store/loginStore";
 const useUser = () => {
   const { logoutAction } = useLoginStore();
-  const { data, error, isLoading, mutate } = useSWR<{ user: CurrentUser }>(
-    "/api/user"
-  );
+  const { data, error, isLoading, mutate } = useSWR<resUser>("/api/user");
   const user = data?.user;
   if (error) {
     logoutAction();

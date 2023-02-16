@@ -13,6 +13,10 @@ export interface Article {
   author: Profile;
 }
 
+export interface resArticle {
+  article: Article;
+}
+
 export interface MultipleArticle {
   articles: Article[];
   articlesCount: number;

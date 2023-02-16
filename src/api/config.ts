@@ -27,10 +27,11 @@ const customAxios = async ({ method, url, body }: IcustomAxios) => {
   }
 };
 
-export const customGet = (url: string) => customAxios({ method: "get", url });
-export const customPost = (url: string, body?: {}) =>
+export const customGet = <T>(url: string): Promise<T> =>
+  customAxios({ method: "get", url });
+export const customPost = <T>(url: string, body?: {}): Promise<T> =>
   customAxios({ method: "post", url, body });
-export const customPut = (url: string, body?: {}) =>
+export const customPut = <T>(url: string, body?: {}): Promise<T> =>
   customAxios({ method: "put", url, body });
-export const customDelete = (url: string) =>
+export const customDelete = <T>(url: string): Promise<T> =>
   customAxios({ method: "delete", url });

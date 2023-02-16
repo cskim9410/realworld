@@ -1,2 +1,5 @@
 import { customPost } from "./config";
-export const postArticle = (body: {}) => customPost("/api/articles", body);
+import type { resArticle } from "./../types/article";
+
+export const postArticle = (body: {}) =>
+  customPost<resArticle>("/api/articles", body);

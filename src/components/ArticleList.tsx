@@ -1,5 +1,7 @@
 import useArticles from "./../hooks/useArticles";
 import ArticleCard from "./ArticleCard";
+import useLoginStore from "./../store/loginStore";
+import { useEffect } from "react";
 
 interface ArticleListProps {
   query: string[];
@@ -14,10 +16,15 @@ const ArticleList = ({
   currentPage,
   hidden,
 }: ArticleListProps) => {
+  const { isLogin } = useLoginStore();
   const { articles, mutate } = useArticles({
     query: query[Number(active)],
     page: currentPage,
   });
+
+  useEffect(() => {
+    mutate();
+  }, [isLogin]);
 
   if (hidden) {
     return <></>;
