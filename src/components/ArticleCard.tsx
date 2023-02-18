@@ -20,14 +20,10 @@ const ArticleCard = ({
   const clickFavBtn = async () => {
     if (!isLogin) navigate("/login");
     setDisabled(true);
-    if (article.favorited) {
-      await deleteFavorite(article.slug);
-      await mutate();
-    }
-    if (!article.favorited) {
-      await addFavorite(article.slug);
-      await mutate();
-    }
+    article.favorited
+      ? await deleteFavorite(article.slug)
+      : await addFavorite(article.slug);
+    await mutate();
     setDisabled(false);
   };
 

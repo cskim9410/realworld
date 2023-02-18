@@ -9,11 +9,11 @@ interface ArticleMetaProps {
 
 const ArticleMeta = ({ user, createdAt, nameColor }: ArticleMetaProps) => {
   return (
-    <div className="flex">
+    <>
       <a href={""} className="inline-block">
         <img src={user.image} className="h-8 w-8 rounded-full" />
       </a>
-      <div className="ml-1 inline-block leading-4 align-super mr-6">
+      <div className="ml-1 inline-block leading-4 align-super mr-6 text-left">
         <a href="" className={`font-medium hover:underline text-${nameColor}`}>
           {user.username}
         </a>
@@ -21,7 +21,7 @@ const ArticleMeta = ({ user, createdAt, nameColor }: ArticleMetaProps) => {
           {dayFormatter(createdAt)}
         </span>
       </div>
-    </div>
+    </>
   );
 };
 export default ArticleMeta;

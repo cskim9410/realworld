@@ -61,7 +61,7 @@ const Editor = () => {
         tagList,
       },
     });
-    navigate(`/`);
+    navigate(`/article/${article.slug}`);
   };
 
   return (

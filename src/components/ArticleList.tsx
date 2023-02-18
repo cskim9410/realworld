@@ -2,6 +2,7 @@ import useArticles from "./../hooks/useArticles";
 import ArticleCard from "./ArticleCard";
 import useLoginStore from "./../store/loginStore";
 import { useEffect } from "react";
+import Loading from "./Loading";
 
 interface ArticleListProps {
   query: string[];
@@ -17,7 +18,7 @@ const ArticleList = ({
   hidden,
 }: ArticleListProps) => {
   const { isLogin } = useLoginStore();
-  const { articles, mutate } = useArticles({
+  const { articles, mutate, isLoading } = useArticles({
     query: query[Number(active)],
     page: currentPage,
   });
@@ -28,6 +29,10 @@ const ArticleList = ({
 
   if (hidden) {
     return <></>;
+  }
+
+  if (isLoading) {
+    return <Loading minH={"50"} size="12" />;
   }
 
   return (

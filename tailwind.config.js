@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+
 module.exports = {
   content: ["./src/**/*.{html,js,ts,tsx}"],
   theme: {
@@ -9,6 +10,7 @@ module.exports = {
         active: "rgba(0, 0, 0, 0.8)",
         hoverLink: "rgba(0, 0, 0, 0.6)",
         unActive: "rgba(0, 0, 0, 0.3)",
+        danger: "#b85c5c",
       },
       fontFamily: {
         logo: "Titillium Web",

@@ -1,6 +1,7 @@
 import ArticleMeta from "./ArticleMeta";
 import useSlug from "./../hooks/useSlug";
 import { useParams } from "react-router-dom";
+import ArticleAction from "./ArticleAction";
 
 const SlugBanner = () => {
   const { slug } = useParams();
@@ -20,12 +21,7 @@ const SlugBanner = () => {
               nameColor="[#fff]"
             />
           )}
-          <button className="mr-1 border rounded border-[#ccc] text-[#ccc]  px-2 py-1 text-sm leading-[1.25] hover:bg-[#ccc] hover:text-white">
-            Follow sdfasdf
-          </button>
-          <button className="border border-green text-green rounded px-2 py-1 text-sm leading-[1.25] hover:bg-green hover:text-white transition-all">
-            Favorite Article (numveR)
-          </button>
+          <ArticleAction />
         </div>
       </div>
     </div>

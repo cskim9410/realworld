@@ -1,5 +1,5 @@
 import Banner from "../../components/Banner";
-import { useState, useRef, useEffect, useMemo } from "react";
+import { useState, useMemo } from "react";
 import useArticles from "../../hooks/useArticles";
 import PopularTags from "../../components/PopularTags";
 import useLoginStore from "../../store/loginStore";
