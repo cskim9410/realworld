@@ -2,11 +2,9 @@ import { NavLink } from "react-router-dom";
 import useUser from "../hooks/useUser";
 import { IoIosSettings } from "react-icons/io";
 import { RiEditBoxLine } from "react-icons/ri";
-import useLoginStore from "../store/loginStore";
 
 const LoginHeader = () => {
   const { user } = useUser();
-  const { logoutAction } = useLoginStore();
 
   return (
     <ul className="flex">
@@ -64,14 +62,6 @@ const LoginHeader = () => {
           />
           <span>{user?.username}</span>
         </NavLink>
-        <button
-          onClick={() => {
-            localStorage.removeItem("jwtToken");
-            logoutAction();
-          }}
-        >
-          로그아웃
-        </button>
       </li>
     </ul>
   );

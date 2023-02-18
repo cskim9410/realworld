@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { putUser } from "./../../api/user";
 import type { ChangeEvent, FormEvent } from "react";
 import useUser from "./../../hooks/useUser";
+import useLoginStore from "../../store/loginStore";
+import useArticles from "../../hooks/useArticles";
 
 interface Body {
   email: string | undefined;
@@ -14,7 +16,10 @@ interface Body {
 
 const Settings = () => {
   const navigate = useNavigate();
+  const { logoutAction } = useLoginStore();
   const [isLoading, setIsLoading] = useState(false);
+  const { mutate: articlesMutate } = useArticles({ query: "?", page: 1 });
+  const [disabled, setDisabled] = useState(false);
 
   const { user, isLoading: isUserLoading, mutate } = useUser();
 
@@ -27,6 +32,14 @@ const Settings = () => {
   });
 
   const { email, password, username, bio, image } = formBody;
+
+  const Logout = async () => {
+    setDisabled(true);
+    localStorage.removeItem("jwtToken");
+    await articlesMutate();
+    logoutAction();
+    navigate("/", { replace: true });
+  };
 
   useEffect(() => {
     setFormBody({
@@ -114,6 +127,13 @@ const Settings = () => {
           </fieldset>
         </form>
         <hr className="my-4" />
+        <button
+          onClick={Logout}
+          disabled={disabled}
+          className="py-2 px-4 text-danger border border-danger hover:bg-danger hover:text-white rounded font-semibold text-base disabled:bg-danger disabled:opacity-70 disabled:cursor-not-allowed"
+        >
+          Or click here to logout.
+        </button>
       </div>
     </div>
   );
