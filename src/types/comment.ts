@@ -6,3 +6,7 @@ export interface Comment {
   body: string;
   author: Profile;
 }
+
+export interface resComments {
+  comments: Comment[];
+}

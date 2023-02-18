@@ -32,7 +32,7 @@ const ArticleList = ({
   }
 
   if (isLoading) {
-    return <Loading minH={"50"} size="12" />;
+    return <Loading minH={"50"} size="30" />;
   }
 
   return (

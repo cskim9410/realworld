@@ -9,7 +9,7 @@ const PopularTagItem = ({ clickBtn }: PopularTagItemProps) => {
   const { tags, isLoading } = useTags();
 
   if (isLoading) {
-    return <Loading minH={"10"} size="8" />;
+    return <Loading minH={"10"} size="24" />;
   }
 
   return (
