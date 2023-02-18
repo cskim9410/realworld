@@ -1,4 +1,4 @@
-import Banner from "../../components/Banner";
+import MainBanner from "../../components/MainBanner";
 import { useState, useMemo } from "react";
 import useArticles from "../../hooks/useArticles";
 import PopularTags from "../../components/PopularTags";
@@ -21,7 +21,7 @@ const Home = () => {
 
   return (
     <>
-      <Banner />
+      <MainBanner />
       <div className=" screen-width flex">
         <div className="flex-[0_0_75%] md:px-4">
           <FeedNav active={active} setActive={setActive} tag={tag} />
