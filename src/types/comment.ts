@@ -7,6 +7,6 @@ export interface Comment {
   author: Profile;
 }
 
-export interface resComments {
+export interface ResComments {
   comments: Comment[];
 }

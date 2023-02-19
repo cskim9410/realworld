@@ -8,9 +8,8 @@ import {
 import { postArticle, putArticle } from "../../api/article";
 import { useNavigate, useParams } from "react-router-dom";
 import EditTag from "../../components/EditTag";
-import useSlug from "../../hooks/useSlug";
 import { customGet } from "../../api/config";
-import { resArticle } from "../../types/article";
+import { ResArticle } from "../../types/article";
 
 interface Body {
   title: string;
@@ -40,7 +39,7 @@ const Editor = () => {
     async function init() {
       if (slug) {
         setIsEdit(true);
-        const { article } = await customGet<resArticle>(
+        const { article } = await customGet<ResArticle>(
           `/api/articles/${slug}`
         );
         setArticleBody({
@@ -94,7 +93,7 @@ const Editor = () => {
           tagList,
         },
       });
-      navigate(`/article/${article.slug}`);
+      return navigate(`/article/${article.slug}`);
     }
     const { article } = await postArticle({
       article: {

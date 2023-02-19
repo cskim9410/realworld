@@ -28,7 +28,7 @@ const CommentItem = ({ comment }: CommentItemProps) => {
       <div className="border-t text-[0.8rem] font-light px-5 py-3 flex justify-between items-center bg-[#f5f5f5]">
         <div className="flex items-center">
           <Link
-            to={`/@${comment.author.username}`}
+            to={`/profile/${comment.author.username}`}
             className="text-green hover:underline"
           >
             <img

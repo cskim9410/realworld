@@ -6,6 +6,6 @@ export interface CurrentUser {
   image: string;
 }
 
-export interface resUser {
+export interface ResUser {
   user: CurrentUser;
 }

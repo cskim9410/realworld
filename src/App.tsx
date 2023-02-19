@@ -9,6 +9,7 @@ import Editor from "./pages/editor/Editor";
 import Register from "./pages/register/Register";
 import Settings from "./pages/settings/Settings";
 import Slug from "./pages/article/Slug";
+import Profile from "./pages/profile/Profile";
 
 function App() {
   const fetcher = async (url: string) => {
@@ -33,6 +34,7 @@ function App() {
           <Route path="/editor" element={<Editor />}></Route>
           <Route path="/settings" element={<Settings />}></Route>
           <Route path="/article/:slug" element={<Slug />}></Route>
+          <Route path="/profile/:username" element={<Profile />}></Route>
         </Route>
       </Routes>
     </SWRConfig>

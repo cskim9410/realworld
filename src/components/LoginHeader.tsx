@@ -48,7 +48,7 @@ const LoginHeader = () => {
       </li>
       <li>
         <NavLink
-          to={`/@${user?.username}`}
+          to={`/profile/${user?.username}`}
           className={({ isActive }) => {
             return `hover:text-hoverLink py-2 ml-4 ${
               isActive ? "text-active" : "text-unActive"

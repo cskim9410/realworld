@@ -1,5 +1,5 @@
 import useSWR from "swr";
-import { resComments } from "../types/comment";
+import { ResComments } from "../types/comment";
 
 const useComments = (slug: string) => {
   const {
@@ -7,7 +7,7 @@ const useComments = (slug: string) => {
     error,
     isLoading,
     mutate,
-  } = useSWR<resComments>(`/api/articles/${slug}/comments`);
+  } = useSWR<ResComments>(`/api/articles/${slug}/comments`);
   return { comments, error, isLoading, mutate };
 };
 

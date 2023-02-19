@@ -13,7 +13,7 @@ export interface Article {
   author: Profile;
 }
 
-export interface resArticle {
+export interface ResArticle {
   article: Article;
 }
 
