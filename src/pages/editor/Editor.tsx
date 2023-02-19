@@ -1,7 +1,16 @@
-import { useState, FormEvent, ChangeEvent, KeyboardEvent } from "react";
-import { postArticle } from "../../api/article";
-import { useNavigate } from "react-router-dom";
+import {
+  useState,
+  FormEvent,
+  ChangeEvent,
+  KeyboardEvent,
+  useEffect,
+} from "react";
+import { postArticle, putArticle } from "../../api/article";
+import { useNavigate, useParams } from "react-router-dom";
 import EditTag from "../../components/EditTag";
+import useSlug from "../../hooks/useSlug";
+import { customGet } from "../../api/config";
+import { resArticle } from "../../types/article";
 
 interface Body {
   title: string;
@@ -12,7 +21,11 @@ interface Body {
 }
 
 const Editor = () => {
+  const { slug } = useParams();
+  const [isEdit, setIsEdit] = useState(false);
+
   const navigate = useNavigate();
+
   const [articleBody, setArticleBody] = useState<Body>({
     title: "",
     description: "",
@@ -22,6 +35,25 @@ const Editor = () => {
   });
 
   const { title, description, body, tagList, tag } = articleBody;
+
+  useEffect(() => {
+    async function init() {
+      if (slug) {
+        setIsEdit(true);
+        const { article } = await customGet<resArticle>(
+          `/api/articles/${slug}`
+        );
+        setArticleBody({
+          ...articleBody,
+          title: article.title,
+          description: article.description,
+          body: article.body,
+          tagList: article.tagList,
+        });
+      }
+    }
+    init();
+  }, [slug]);
 
   const changeBodyProp = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -53,6 +85,17 @@ const Editor = () => {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (isEdit) {
+      const { article } = await putArticle(slug!, {
+        article: {
+          title,
+          description,
+          body,
+          tagList,
+        },
+      });
+      navigate(`/article/${article.slug}`);
+    }
     const { article } = await postArticle({
       article: {
         title,
