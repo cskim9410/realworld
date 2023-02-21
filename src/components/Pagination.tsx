@@ -1,16 +1,23 @@
 import type { Dispatch, SetStateAction } from "react";
+import useArticles from "../hooks/useArticles";
 interface PaginationProps {
-  articlesCount: number;
+  query: string[];
+  active: number;
   currentPage: number;
   setCurrentPage: Dispatch<SetStateAction<number>>;
 }
 
 const Pagination = ({
-  articlesCount,
+  query,
+  active,
   currentPage,
   setCurrentPage,
 }: PaginationProps) => {
-  const lastPage = Math.ceil(articlesCount / 10);
+  const { articles } = useArticles({
+    query: query[active],
+    page: currentPage,
+  });
+  const lastPage = Math.ceil(articles.articlesCount / 10);
   const pageArr = [...Array(lastPage)].map((p, i) => i + 1);
 
   return (

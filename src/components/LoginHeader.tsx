@@ -1,10 +1,33 @@
 import { NavLink } from "react-router-dom";
-import useUser from "../hooks/useUser";
 import { IoIosSettings } from "react-icons/io";
 import { RiEditBoxLine } from "react-icons/ri";
+import useLoginStore from "../store/loginStore";
+import { useEffect, useState } from "react";
+
+import { ResUser } from "../types/user";
+import { customGet } from "../api/config";
 
 const LoginHeader = () => {
-  const { user } = useUser();
+  const { logoutAction, isLogin } = useLoginStore();
+  const [user, setUser] = useState<ResUser>({
+    user: {
+      bio: "",
+      username: "",
+      image: "",
+    },
+  } as ResUser);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const data = await customGet<ResUser>("/api/user");
+        setUser(data);
+      } catch (error) {
+        logoutAction();
+        console.log(error);
+      }
+    })();
+  }, [isLogin]);
 
   return (
     <ul className="flex">
@@ -47,21 +70,23 @@ const LoginHeader = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink
-          to={`/profile/${user?.username}`}
-          className={({ isActive }) => {
-            return `hover:text-hoverLink py-2 ml-4 ${
-              isActive ? "text-active" : "text-unActive"
-            }`;
-          }}
-        >
-          <img
-            src={user?.image}
-            alt=""
-            className="rounded-full w-[26px] h-[26px] inline-block mr-1"
-          />
-          <span>{user?.username}</span>
-        </NavLink>
+        {user && (
+          <NavLink
+            to={`/profile/${user.user.username}`}
+            className={({ isActive }) => {
+              return `hover:text-hoverLink py-2 ml-4 ${
+                isActive ? "text-active" : "text-unActive"
+              }`;
+            }}
+          >
+            <img
+              src={user.user.image}
+              alt=""
+              className="rounded-full w-[26px] h-[26px] inline-block mr-1"
+            />
+            <span>{user.user.username}</span>
+          </NavLink>
+        )}
       </li>
     </ul>
   );

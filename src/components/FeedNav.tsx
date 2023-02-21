@@ -2,8 +2,8 @@ import useLoginStore from "./../store/loginStore";
 import type { Dispatch, SetStateAction } from "react";
 
 interface FeedNavProps {
-  active: "0" | "1" | "2";
-  setActive: Dispatch<SetStateAction<"0" | "1" | "2">>;
+  active: number;
+  setActive: Dispatch<SetStateAction<number>>;
   tag: string;
 }
 
@@ -15,8 +15,8 @@ const FeedNav = ({ active, setActive, tag }: FeedNavProps) => {
       {isLogin && (
         <li className="flex ">
           <button
-            onClick={() => setActive("0")}
-            className={`py-2 px-4 ${active === "0" ? "feed-nav-active" : ""}`}
+            onClick={() => setActive(0)}
+            className={`py-2 px-4 ${active === 0 ? "feed-nav-active" : ""}`}
           >
             Your Feed
           </button>
@@ -24,17 +24,17 @@ const FeedNav = ({ active, setActive, tag }: FeedNavProps) => {
       )}
       <li className="flex">
         <button
-          onClick={() => setActive("1")}
-          className={`py-2 px-4 ${active === "1" ? "feed-nav-active" : ""}`}
+          onClick={() => setActive(1)}
+          className={`py-2 px-4 ${active === 1 ? "feed-nav-active" : ""}`}
         >
           Global Feed
         </button>
       </li>
-      {active === "2" && (
+      {active === 2 && (
         <li className="flex">
           <button
-            onClick={() => setActive("2")}
-            className={`py-2 px-4 ${active === "2" ? "feed-nav-active" : ""}`}
+            onClick={() => setActive(2)}
+            className={`py-2 px-4 ${active === 2 ? "feed-nav-active" : ""}`}
           >
             #{tag}
           </button>

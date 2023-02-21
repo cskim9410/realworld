@@ -3,19 +3,18 @@ import { Link, useNavigate } from "react-router-dom";
 import { deleteFollow, postFollow } from "../api/profile";
 import useUser from "../hooks/useUser";
 import useLoginStore from "../store/loginStore";
-import { ResProfile } from "../types/profile";
 import { useState } from "react";
-import { KeyedMutator } from "swr";
+import useProfile from "../hooks/useProfile";
 
 interface PorfileBannerProps {
-  profile: ResProfile;
-  mutate: KeyedMutator<ResProfile>;
+  username: string;
 }
 
-const ProfileBanner = ({ profile, mutate }: PorfileBannerProps) => {
+const ProfileBanner = ({ username }: PorfileBannerProps) => {
+  const { profile, mutate } = useProfile(username);
   const { user } = useUser();
   const navigate = useNavigate();
-  const { image, username, bio, following } = profile.profile;
+  const { image, bio, following } = profile.profile;
   const { isLogin } = useLoginStore();
   const [disabled, setDisabled] = useState(false);
 
@@ -39,7 +38,7 @@ const ProfileBanner = ({ profile, mutate }: PorfileBannerProps) => {
           <h4 className="font-bold text-2xl leading-4 mb-2">{username}</h4>
           <p className="mb-2 text-[#aaa] font-light">{bio}</p>
         </div>
-        {username === user?.username ? (
+        {username === user?.user.username ? (
           <Link to={`/settings`}>
             <button className="text-[#999] border border-[#464040] hover:bg-[#ccc] rounded px-2 py-1 text-sm ml-auto block">
               Edit Profile Settings

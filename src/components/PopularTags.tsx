@@ -3,12 +3,12 @@ import PopularTagItem from "./PopularTagItem";
 
 interface PopularTagsProps {
   setTag: Dispatch<SetStateAction<string>>;
-  setActive: Dispatch<SetStateAction<"0" | "1" | "2">>;
+  setActive: Dispatch<SetStateAction<number>>;
 }
 
 const PopularTags = ({ setTag, setActive }: PopularTagsProps) => {
   const clickBtn = (tag: string) => {
-    setActive("2");
+    setActive(2);
     setTag(tag);
   };
 

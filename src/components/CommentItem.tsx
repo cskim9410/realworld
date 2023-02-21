@@ -42,7 +42,7 @@ const CommentItem = ({ comment }: CommentItemProps) => {
             {dayFormatter(comment.createdAt)}
           </span>
         </div>
-        {comment.author.username === user?.username && (
+        {comment.author.username === user?.user.username && (
           <button
             onClick={deleteCommentReq}
             className="hover:opacity-100 hover:cursor-pointer"

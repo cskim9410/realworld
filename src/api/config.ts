@@ -22,8 +22,8 @@ const customAxios = async ({ method, url, body }: IcustomAxios) => {
       (method === "delete" && (await axios.delete(url, config))) ||
       {};
     return data;
-  } catch (error) {
-    throw error;
+  } catch (error: any) {
+    throw new Error(error);
   }
 };
 

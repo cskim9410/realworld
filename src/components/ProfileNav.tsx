@@ -1,8 +1,8 @@
 import type { Dispatch, SetStateAction } from "react";
 
 interface ProfileNavProps {
-  active: string;
-  setActive: Dispatch<SetStateAction<"0" | "1" | "2">>;
+  active: number;
+  setActive: Dispatch<SetStateAction<number>>;
 }
 
 const ProfileNav = ({ active, setActive }: ProfileNavProps) => {
@@ -10,8 +10,8 @@ const ProfileNav = ({ active, setActive }: ProfileNavProps) => {
     <ul className="flex text-[#aaa]">
       <li className="flex ">
         <button
-          onClick={() => setActive("0")}
-          className={`py-2 px-4 ${active === "0" ? "feed-nav-active" : ""}`}
+          onClick={() => setActive(0)}
+          className={`py-2 px-4 ${active === 0 ? "feed-nav-active" : ""}`}
         >
           My Articles
         </button>
@@ -19,8 +19,8 @@ const ProfileNav = ({ active, setActive }: ProfileNavProps) => {
 
       <li className="flex">
         <button
-          onClick={() => setActive("1")}
-          className={`py-2 px-4 ${active === "1" ? "feed-nav-active" : ""}`}
+          onClick={() => setActive(1)}
+          className={`py-2 px-4 ${active === 1 ? "feed-nav-active" : ""}`}
         >
           Favorited Articles
         </button>

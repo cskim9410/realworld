@@ -1,5 +1,11 @@
+import { customGet } from "./../api/config";
 import useSWR from "swr";
-import { ResComments } from "../types/comment";
+import type { ResComments } from "../types/comment";
+
+const fetcher = async (url: string) => {
+  const data = await customGet<ResComments>(url);
+  return data;
+};
 
 const useComments = (slug: string) => {
   const {
@@ -7,7 +13,7 @@ const useComments = (slug: string) => {
     error,
     isLoading,
     mutate,
-  } = useSWR<ResComments>(`/api/articles/${slug}/comments`);
+  } = useSWR(`/api/articles/${slug}/comments`, fetcher);
   return { comments, error, isLoading, mutate };
 };
 

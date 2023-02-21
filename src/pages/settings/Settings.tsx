@@ -4,7 +4,6 @@ import { putUser } from "./../../api/user";
 import type { ChangeEvent, FormEvent } from "react";
 import useUser from "./../../hooks/useUser";
 import useLoginStore from "../../store/loginStore";
-import useArticles from "../../hooks/useArticles";
 
 interface Body {
   email: string | undefined;
@@ -18,17 +17,16 @@ const Settings = () => {
   const navigate = useNavigate();
   const { logoutAction } = useLoginStore();
   const [isLoading, setIsLoading] = useState(false);
-  const { mutate: articlesMutate } = useArticles({ query: "?", page: 1 });
   const [disabled, setDisabled] = useState(false);
 
   const { user, isLoading: isUserLoading, mutate } = useUser();
 
   const [formBody, setFormBody] = useState<Body>({
-    email: user?.email,
+    email: user?.user.email,
     password: "",
-    username: user?.username,
-    bio: user?.bio,
-    image: user?.image,
+    username: user?.user.username,
+    bio: user?.user.bio,
+    image: user?.user.image,
   });
 
   const { email, password, username, bio, image } = formBody;
@@ -36,18 +34,17 @@ const Settings = () => {
   const Logout = async () => {
     setDisabled(true);
     localStorage.removeItem("jwtToken");
-    await articlesMutate();
     logoutAction();
     navigate("/", { replace: true });
   };
 
   useEffect(() => {
     setFormBody({
-      email: user?.email,
+      email: user?.user.email,
       password: "",
-      username: user?.username,
-      bio: user?.bio,
-      image: user?.image,
+      username: user?.user.username,
+      bio: user?.user.bio,
+      image: user?.user.image,
     });
   }, [user]);
 

@@ -44,7 +44,7 @@ const CommentForm = () => {
         ></textarea>
         <div className="border-t text-[0.8rem] font-light py-3 px-5 bg-[#f5f5f5] flex justify-between">
           <img
-            src={user?.image}
+            src={user?.user.image}
             alt="user-img"
             className="w-7 h-7 rounded-full"
           />

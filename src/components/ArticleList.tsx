@@ -2,11 +2,10 @@ import useArticles from "./../hooks/useArticles";
 import ArticleCard from "./ArticleCard";
 import useLoginStore from "./../store/loginStore";
 import { useEffect } from "react";
-import Loading from "./Loading";
 
 interface ArticleListProps {
   query: string[];
-  active: "0" | "1" | "2";
+  active: number;
   currentPage: number;
   hidden?: boolean;
 }
@@ -18,8 +17,8 @@ const ArticleList = ({
   hidden,
 }: ArticleListProps) => {
   const { isLogin } = useLoginStore();
-  const { articles, mutate, isLoading } = useArticles({
-    query: query[Number(active)],
+  const { articles, mutate } = useArticles({
+    query: query[active],
     page: currentPage,
   });
 
@@ -31,19 +30,11 @@ const ArticleList = ({
     return <></>;
   }
 
-  if (isLoading) {
-    return <Loading minH={"50"} size="30" />;
-  }
-
   return (
     <>
-      {articles && (
-        <>
-          {articles.articles.map((article) => (
-            <ArticleCard key={article.slug} article={article} mutate={mutate} />
-          ))}
-        </>
-      )}
+      {articles.articles.map((article) => (
+        <ArticleCard key={article.slug} article={article} mutate={mutate} />
+      ))}
       {articles?.articlesCount === 0 && (
         <div className="border-t-[1px] border-[rgba(0, 0, 0, 0.1)] py-6 w-full">
           No articles are here... yet.

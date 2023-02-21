@@ -25,7 +25,7 @@ const ArticleAction = () => {
   const [disabled, setDisabled] = useState(false);
 
   useEffect(() => {
-    if (article?.article.author.username === user?.username) {
+    if (article?.article.author.username === user?.user.username) {
       setIsAuthor(true);
     }
   }, [user, article]);
