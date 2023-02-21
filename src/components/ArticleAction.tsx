@@ -1,6 +1,7 @@
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useSlug from "../hooks/useSlug";
 import useUser from "../hooks/useUser";
+import { useSWRConfig } from "swr";
 import { useState, useEffect } from "react";
 
 import { IoTrashSharp } from "react-icons/io5";
@@ -11,13 +12,12 @@ import { BiPlus } from "react-icons/bi";
 import useLoginStore from "../store/loginStore";
 import { deleteArticle } from "../api/article";
 import { addFavorite, deleteFavorite } from "../api/favorite";
-import useArticles from "../hooks/useArticles";
 import { deleteFollow, postFollow } from "../api/profile";
 
 const ArticleAction = () => {
   const { slug } = useParams();
   const { article, mutate: currentSlugMutate } = useSlug(slug!);
-  const { mutate: articlesMutate } = useArticles({ query: "?", page: 1 });
+  const { mutate } = useSWRConfig();
   const { user } = useUser();
   const [isAuthor, setIsAuthor] = useState(false);
   const { isLogin } = useLoginStore();
@@ -36,7 +36,7 @@ const ArticleAction = () => {
 
   const clickdeleteBtn = async () => {
     await deleteArticle(slug!);
-    await articlesMutate();
+    mutate(() => true, undefined, false);
     navigate("/", { replace: true });
   };
   const clickFollowBtn = async () => {
