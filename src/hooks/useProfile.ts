@@ -1,11 +1,6 @@
-import { customGet } from "./../api/config";
 import useSWR from "swr";
 import type { ResProfile } from "../types/profile";
-
-const fetcher = async (url: string) => {
-  const data = await customGet<ResProfile>(url);
-  return data;
-};
+import { fetcher } from "../api/fetcher";
 
 const useProfile = (username: string) => {
   const {
@@ -13,7 +8,7 @@ const useProfile = (username: string) => {
     mutate,
     error,
     isLoading,
-  } = useSWR(`/api/profiles/${username}`, fetcher, {
+  } = useSWR(`/api/profiles/${username}`, fetcher<ResProfile>, {
     suspense: true,
   });
 

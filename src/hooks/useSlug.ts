@@ -1,11 +1,6 @@
-import { customGet } from "./../api/config";
 import useSWR from "swr";
 import { ResArticle } from "../types/article";
-
-const fetcher = async (url: string) => {
-  const data = await customGet<ResArticle>(url);
-  return data;
-};
+import { fetcher } from "../api/fetcher";
 
 const useSlug = (slug: string) => {
   const {
@@ -13,7 +8,7 @@ const useSlug = (slug: string) => {
     error,
     mutate,
     isLoading,
-  } = useSWR(`/api/articles/${slug}`, fetcher);
+  } = useSWR(`/api/articles/${slug}`, fetcher<ResArticle>);
 
   return { article, mutate, isLoading, error };
 };
